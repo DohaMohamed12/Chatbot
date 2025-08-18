@@ -34,6 +34,10 @@ if st.button("Send"):
                 messages=[{"role": "user", "content": user_input}],
             )
 
-        st.write(completion.choices[0].message.content)
+        # split answer by line and show each line separately
+        answer = completion.choices[0].message.content
+        for line in answer.split("\n"):
+            if line.strip() != "":
+                st.write(line)
     else:
         st.warning("Please enter a question before sending.")
