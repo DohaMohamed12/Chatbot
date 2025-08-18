@@ -9,12 +9,13 @@ client = OpenAI(
 )
 
 # ---- PAGE LAYOUT ----
-st.set_page_config(page_title="HuggingFace Chatbot", layout="centered")
+st.set_page_config(page_title="Crochet Hub Chatbot", layout="centered")
 
+# custom header
 st.markdown(
     """
-    <h1 style='text-align:center;'>🤖 HuggingFace GPT-OSS 20B Chat</h1>
-    <p style='text-align:center;color:gray;'>Ask anything and get instant responses using the Fireworks AI model hosted on HuggingFace.</p>
+    <h1 style='text-align:center;'>🧶 Crochet Hub Chatbot</h1>
+    <p style='text-align:center;color:gray;'>اسأل أي حاجة عن الكروشيه وخليك جاهز لأجوبة فورية من الموديل 🪡</p>
     """,
     unsafe_allow_html=True
 )
@@ -22,7 +23,7 @@ st.markdown(
 st.write("---")
 
 # text area for longer prompts
-user_input = st.text_area("Your question:", height=150)
+user_input = st.text_area("اكتب سؤالك هنا:", height=150)
 
 # when user clicks the button
 if st.button("Send"):
@@ -34,6 +35,7 @@ if st.button("Send"):
             )
 
         st.write("### Response:")
-        st.success(completion.choices[0].message.content)
+        # instead of st.success (green background), just write the raw message:
+        st.write(completion.choices[0].message.content)
     else:
         st.warning("Please enter a question before sending.")
