@@ -1,11 +1,11 @@
-# app.py
 import streamlit as st
+import os
 from openai import OpenAI
 
 # Create client
 client = OpenAI(
     base_url="https://router.huggingface.co/v1",
-    api_key="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"
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 # ---- PAGE LAYOUT ----
