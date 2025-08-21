@@ -11,22 +11,59 @@ client = OpenAI(
 # ---- PAGE LAYOUT ----
 st.set_page_config(page_title="Crochet Hub Chatbot", layout="centered")
 
-# custom header
+# custom CSS
 st.markdown(
     """
-    <h1 style='text-align:center;'>🧶 Crochet Hub Chatbot</h1>
-    <p style='text-align:center;color:gray;'>Ask anything about crochet and get instant answers 🧵</p>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+        .main {
+            background-color: #ffffff;
+        }
+        .stTextArea textarea {
+            border-radius: 12px;
+            border: 2px solid #dc3c3c;
+            padding: 12px;
+            font-size: 16px;
+        }
+        .send-btn {
+            background-color: #dc3c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .send-btn:hover {
+            background-color: #b83030;
+        }
+    </style>
     """,
+    unsafe_allow_html=True
+)
+
+# custom header with logo
+st.image("logo.png", use_container_width=False)  
+st.markdown(
+    "<p style='text-align:center; color:#dc3c3c; font-size:18px; font-weight:bold;'>Create their happy memories</p>",
     unsafe_allow_html=True
 )
 
 st.write("---")
 
-# text area for longer prompts
-user_input = st.text_area("Your question:", height=150)
+# input box styled like a chat
+col1, col2 = st.columns([8,1])
 
-# when user clicks the button
-if st.button("Send"):
+with col1:
+    user_input = st.text_area(" ", placeholder="Type your message here...", height=80, label_visibility="collapsed")
+
+with col2:
+    send_clicked = st.button("➤", key="send", help="Send message")
+
+# handle input
+if send_clicked:
     if user_input.strip() != "":
         with st.spinner("Thinking..."):
             completion = client.chat.completions.create(
