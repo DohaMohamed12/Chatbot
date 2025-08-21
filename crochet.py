@@ -22,33 +22,49 @@ st.markdown(
         .block-container {
             background-color: #ffffff;
         }
-        /* صندوق الكتابة */
-        .stTextArea textarea {
-            border-radius: 12px;
-            border: 2px solid #dc3c3c;
-            padding: 12px;
-            font-size: 16px;
-            background-color: #ffffff;
-        }
-        /* زر الإرسال */
-        .send-btn {
-            background-color: #dc3c3c;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .send-btn:hover {
-            background-color: #b83030;
-        }
-        /* محاذاة الوسط */
+
+        /* اللوجو والجملة */
         .centered {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            margin-top: 40px;
+        }
+        .tagline {
+            text-align: center;
+            color: #dc3c3c;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* صندوق الكتابة */
+        .chat-box {
+            position: relative;
+            margin-top: 50px;
+        }
+        .chat-input textarea {
+            border-radius: 20px;
+            border: 2px solid #ccc;
+            padding: 10px 40px 10px 15px;
+            font-size: 15px;
+            resize: none;
+            height: 50px !important; /* أرفع */
+        }
+
+        /* أيقونة الإرسال جوه الصندوق */
+        .send-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: gray;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .send-icon:hover {
+            color: #dc3c3c;
         }
     </style>
     """,
@@ -58,36 +74,9 @@ st.markdown(
 # ===== Header =====
 st.markdown("<div class='centered'>", unsafe_allow_html=True)
 st.image("logo.png", width=150)
-st.markdown(
-    "<p style='text-align:center; color:#dc3c3c; font-size:18px; font-weight:bold;'>CREATE THEIR HAPPY MEMORIES</p>",
-    unsafe_allow_html=True
-)
+st.markdown("<p class='tagline'>CREATE THEIR HAPPY MEMORIES</p>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.write("---")
 
-# ===== Input Box =====
-col1, col2 = st.columns([8,1])
-
-with col1:
-    user_input = st.text_area(" ", placeholder="Type your message here...", height=80, label_visibility="collapsed")
-
-with col2:
-    send_clicked = st.button("➤", key="send", help="Send message")
-
-# ===== Handle Input =====
-if send_clicked:
-    if user_input.strip() != "":
-        with st.spinner("Thinking..."):
-            completion = client.chat.completions.create(
-                model="openai/gpt-oss-20b:fireworks-ai",
-                messages=[{"role": "user", "content": user_input}],
-            )
-
-        # split answer by line and show each line separately
-        answer = completion.choices[0].message.content
-        for line in answer.split("\n"):
-            if line.strip() != "":
-                st.write(line)
-    else:
-        st.warning("Please enter a question before sending.")
+# ===== Input Box =
