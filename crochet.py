@@ -39,17 +39,25 @@ st.markdown(
         .send-btn:hover {
             background-color: #b83030;
         }
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# custom header with smaller logo
-st.image("logo.png", width=150)  
+# custom header with centered logo
+st.markdown("<div class='centered'>", unsafe_allow_html=True)
+st.image("logo.png", width=150)
 st.markdown(
-    "<p style='text-align:center; color:#dc3c3c; font-size:18px; font-weight:bold;'>Create their happy memories</p>",
+    "<p style='text-align:center; color:#dc3c3c; font-size:18px; font-weight:bold;'>CREATE THEIR HAPPY MEMORIES</p>",
     unsafe_allow_html=True
 )
+st.markdown("</div>", unsafe_allow_html=True)
 
 st.write("---")
 
