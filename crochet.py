@@ -44,8 +44,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# custom header with logo
-st.image("logo.png", use_container_width=False)  
+# custom header with smaller logo
+st.image("logo.png", width=150)  
 st.markdown(
     "<p style='text-align:center; color:#dc3c3c; font-size:18px; font-weight:bold;'>Create their happy memories</p>",
     unsafe_allow_html=True
