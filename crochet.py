@@ -11,22 +11,26 @@ client = OpenAI(
 # ---- PAGE LAYOUT ----
 st.set_page_config(page_title="Crochet Hub Chatbot", layout="centered")
 
-# custom CSS
+# ===== Custom CSS =====
 st.markdown(
     """
     <style>
-        body {
+        /* الخلفية الأساسية */
+        .stApp {
             background-color: #ffffff;
         }
-        .main {
+        .block-container {
             background-color: #ffffff;
         }
+        /* صندوق الكتابة */
         .stTextArea textarea {
             border-radius: 12px;
             border: 2px solid #dc3c3c;
             padding: 12px;
             font-size: 16px;
+            background-color: #ffffff;
         }
+        /* زر الإرسال */
         .send-btn {
             background-color: #dc3c3c;
             color: white;
@@ -39,6 +43,7 @@ st.markdown(
         .send-btn:hover {
             background-color: #b83030;
         }
+        /* محاذاة الوسط */
         .centered {
             display: flex;
             justify-content: center;
@@ -50,7 +55,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# custom header with centered logo
+# ===== Header =====
 st.markdown("<div class='centered'>", unsafe_allow_html=True)
 st.image("logo.png", width=150)
 st.markdown(
@@ -61,7 +66,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 st.write("---")
 
-# input box styled like a chat
+# ===== Input Box =====
 col1, col2 = st.columns([8,1])
 
 with col1:
@@ -70,7 +75,7 @@ with col1:
 with col2:
     send_clicked = st.button("➤", key="send", help="Send message")
 
-# handle input
+# ===== Handle Input =====
 if send_clicked:
     if user_input.strip() != "":
         with st.spinner("Thinking..."):
